@@ -1,0 +1,44 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+<main class="container wide">
+  <div class="card">
+    <h1>Submissions</h1>
+    <p class="lede">Every intake needs a hand-built starter schedule within 24 hours of submitting.</p>
+
+    <% if (!submissions.length) { %>
+      <div class="empty-state">No submissions yet.</div>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Parent</th>
+            <th>Submitted</th>
+            <th>Due by</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% submissions.forEach(function(s) { %>
+            <tr>
+              <td><%= s.parentName %></td>
+              <td><%= new Date(s.createdAt).toLocaleString() %></td>
+              <td><%= new Date(s.dueBy).toLocaleString() %></td>
+              <td>
+                <% if (s.status === 'scheduled') { %>
+                  <span class="badge badge-scheduled">Scheduled</span>
+                <% } else if (s.isOverdue) { %>
+                  <span class="badge badge-overdue">Overdue</span>
+                <% } else { %>
+                  <span class="badge badge-pending">Pending</span>
+                <% } %>
+              </td>
+              <td><a href="/admin/submissions/<%= s._id %>" class="nav-link">View →</a></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+</main>
+<%- include('../partials/footer') %>

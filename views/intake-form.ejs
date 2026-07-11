@@ -1,0 +1,34 @@
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+<main class="container">
+  <div class="card">
+    <h1>Let's build your starter plan</h1>
+    <p class="lede">Answer a few quick questions about your chores and goals — takes under 3 minutes. We'll turn this into a starter schedule of tiny exercises you can do while doing what you're already doing.</p>
+
+    <% if (errors && errors.length) { %>
+      <div class="flash" style="background: rgba(248,113,113,0.12); border-color: rgba(248,113,113,0.35); color: var(--danger);">
+        <% errors.forEach(function(e) { %>
+          <div><%= e %></div>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/intake">
+      <label for="parentName">Your name</label>
+      <input type="text" id="parentName" name="parentName" value="<%= values.parentName || '' %>" required />
+
+      <label for="chores">Household chores you already do</label>
+      <textarea id="chores" name="chores" placeholder="e.g. school run, washing up, folding laundry, tidying toys" required><%= values.chores || '' %></textarea>
+      <div class="hint">List as many as you like — these are the moments we'll attach tiny exercises to.</div>
+
+      <label for="routineTimes">When does your routine usually happen?</label>
+      <textarea id="routineTimes" name="routineTimes" placeholder="e.g. mornings before school, straight after dinner, weekend afternoons" required><%= values.routineTimes || '' %></textarea>
+
+      <label for="fitnessGoal">Your fitness goal</label>
+      <input type="text" id="fitnessGoal" name="fitnessGoal" placeholder="e.g. build a bit of strength, more energy, just move more" value="<%= values.fitnessGoal || '' %>" required />
+
+      <button type="submit">Submit my answers</button>
+    </form>
+  </div>
+</main>
+<%- include('partials/footer') %>

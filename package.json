@@ -1,0 +1,20 @@
+{
+  "name": "habit-fit",
+  "version": "1.0.0",
+  "description": "Habit Fit onboarding intake and manual starter-schedule tool",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}

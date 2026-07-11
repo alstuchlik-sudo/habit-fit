@@ -1,0 +1,70 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+<main class="container">
+  <a href="/admin" class="nav-link">← Back to submissions</a>
+
+  <div class="card" style="margin-top: 16px;">
+    <h2>Intake answers</h2>
+    <dl class="detail-grid">
+      <dt>Parent</dt>
+      <dd><%= submission.parentName %></dd>
+      <dt>Chores</dt>
+      <dd><%= submission.chores %></dd>
+      <dt>Routine times</dt>
+      <dd><%= submission.routineTimes %></dd>
+      <dt>Fitness goal</dt>
+      <dd><%= submission.fitnessGoal %></dd>
+      <dt>Submitted</dt>
+      <dd><%= new Date(submission.createdAt).toLocaleString() %></dd>
+      <dt>Due by</dt>
+      <dd>
+        <%= new Date(submission.dueBy).toLocaleString() %>
+        <% if (submission.status === 'scheduled') { %>
+          <span class="badge badge-scheduled">Scheduled</span>
+        <% } else if (submission.isOverdue) { %>
+          <span class="badge badge-overdue">Overdue</span>
+        <% } else { %>
+          <span class="badge badge-pending">Pending</span>
+        <% } %>
+      </dd>
+    </dl>
+  </div>
+
+  <div class="card">
+    <h2>Starter schedule</h2>
+    <p class="lede">Manually match each chore to a tiny exercise and a time. No automated matching — this is built by hand for the pilot cohort.</p>
+
+    <% if (saved) { %>
+      <div class="flash">Schedule saved.</div>
+    <% } %>
+
+    <form method="POST" action="/admin/submissions/<%= submission._id %>/schedule" id="schedule-form">
+      <div id="schedule-rows">
+        <% const existing = submission.scheduleItems && submission.scheduleItems.length ? submission.scheduleItems : []; %>
+        <% const rowCount = Math.max(existing.length, 4); %>
+        <% for (let i = 0; i < rowCount; i++) { %>
+          <% const item = existing[i] || { chore: '', exercise: '', timing: '' }; %>
+          <div class="schedule-row">
+            <div>
+              <label>Chore</label>
+              <input type="text" name="chore" value="<%= item.chore %>" placeholder="e.g. school run" />
+            </div>
+            <div>
+              <label>Tiny exercise</label>
+              <input type="text" name="exercise" value="<%= item.exercise %>" placeholder="e.g. 10 calf raises at the door" />
+            </div>
+            <div>
+              <label>Timing</label>
+              <input type="text" name="timing" value="<%= item.timing %>" placeholder="e.g. while putting on shoes" />
+            </div>
+          </div>
+        <% } %>
+      </div>
+
+      <button type="button" id="add-row-btn" class="btn btn-secondary">+ Add another row</button>
+      <button type="submit">Save starter schedule</button>
+    </form>
+  </div>
+</main>
+<script src="/js/admin.js"></script>
+<%- include('../partials/footer') %>
