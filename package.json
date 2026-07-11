@@ -1,6 +1,6 @@
 {
   "name": "habit-fit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Habit Fit onboarding intake and manual starter-schedule tool",
   "main": "server.js",
   "scripts": {
