@@ -68,6 +68,12 @@ header.site-header .container {
   color: var(--accent-light);
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .nav-link {
   color: var(--text-secondary);
   text-decoration: none;
@@ -285,4 +291,19 @@ tr:hover td {
   border-radius: 8px;
   margin-bottom: 20px;
   font-size: 0.9rem;
+}
+
+.chore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.chore-btn {
+  width: 100%;
+  margin-top: 0;
+  padding: 28px 16px;
+  font-size: 1.1rem;
+  border-radius: 12px;
 }

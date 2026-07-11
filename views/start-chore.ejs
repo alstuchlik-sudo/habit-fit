@@ -1,0 +1,21 @@
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+<main class="container">
+  <div class="card">
+    <h1>Start a chore</h1>
+    <p class="lede">Tap the chore you're about to do. We'll log it so we can send you a timely suggestion — no automatic detection needed.</p>
+
+    <% if (started) { %>
+      <div class="flash"><%= choreLabels[started] %> logged — go get 'em!</div>
+    <% } %>
+
+    <div class="chore-grid">
+      <% choreTypes.forEach(function(type) { %>
+        <form method="POST" action="/start/<%= type %>">
+          <button type="submit" class="chore-btn"><%= choreLabels[type] %></button>
+        </form>
+      <% }); %>
+    </div>
+  </div>
+</main>
+<%- include('partials/footer') %>

@@ -8,5 +8,8 @@ module.exports = async () => {
   await mongoose.connection.collection('intakesubmissions').deleteMany({
     parentName: { $regex: /^E2E / },
   });
+  // Chore-start events carry no parent identity to scope an "E2E " prefix to, and the
+  // pilot has no real taps yet, so the whole collection is safe to clear between runs.
+  await mongoose.connection.collection('chorestartevents').deleteMany({});
   await mongoose.disconnect();
 };

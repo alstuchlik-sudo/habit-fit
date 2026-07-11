@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const intakeRoutes = require('./routes/intake');
 const adminRoutes = require('./routes/admin');
+const choreRoutes = require('./routes/chore');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', intakeRoutes);
+app.use('/', choreRoutes);
 app.use('/admin', adminRoutes);
 
 app.use((req, res) => {
